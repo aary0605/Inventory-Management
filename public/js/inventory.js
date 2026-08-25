@@ -1,5 +1,4 @@
-
-
+const editform = document.getElementById('edit-Form');
 const formDiv = document.getElementById('product-form');
 const form = document.getElementById('form');
 const addButton = document.getElementById('add-product');
@@ -8,23 +7,32 @@ const saveProduct = document.getElementById('save');
 const body = document.getElementById('products-body');
 const getCategory = document.getElementById('category-dropdowns');
 const getPrice = document.getElementById('price-dropdowns');
+const editForm = document.getElementById('edit-form');
+const editCancel = document.getElementById('cancel-btn-1');
 
 // * Get all products on load 
 //! Default
 window.addEventListener('load', async (e) => {
   productsHistory();
   console.log('Executed');
-})
+});
 
 addButton.addEventListener('click', (e) => {
   e.preventDefault();
   formDiv.style.display = "block";
-})
+});
 
 cancelBtn.addEventListener('click', (e) => {
   e.preventDefault();
   formDiv.style.display = "none";
-})
+});
+
+editCancel.addEventListener('click',(e)=> {
+   editForm.style.display = "none";
+});
+
+
+
 
 
 // TODO Event listener for the submit
@@ -77,6 +85,21 @@ document.getElementById('form').addEventListener('submit', async function (e) {
     console.log(err);
   }
 })
+
+
+
+// TODO: Edit Form Event Listener for edit form;
+// editForm.addEventListener('submit',async(e) => {
+//   e.preventDefault();
+//   const productName = document.getElementById('product-name').value.trim();
+//   const category = document.getElementById('category').value;
+//   const quantity = document.getElementById('quantity').value;
+//   const price = document.getElementById('price').value;
+//   const supplier = document.getElementById('supplier').value.trim();
+//   console.log(productName);
+  
+// })
+
 
 // TODO: Event Listener for change in Category Selection
 getCategory.addEventListener('change', async () => {
@@ -146,7 +169,7 @@ async function getRows(data) {
       <td> ${row.supplier}</td>
       <td> ${row.supplier_id}</td>
       
-      <button id="edit" onclick="editProduct(${row.id}))"> Edit</button>
+      <button id="edit" onclick="editProduct(${row.id})"> Edit</button>
       <button id="delete" onclick="deleteProduct(${row.id})">Delete</button>
       
       </tr>`
@@ -183,6 +206,10 @@ async function deleteProduct(id) {
   });
 
   console.log("Deleted");
+}
+async function getEditData(id){
+  const res = await fetch(`http://localhost:8000/inventory/product/data?id=${id};`);
+  
 }
 // TODO : Fix Database.
 // ! Create a edit form.
