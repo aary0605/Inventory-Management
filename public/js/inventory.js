@@ -91,6 +91,7 @@ document.getElementById('form').addEventListener('submit', async function (e) {
 // TODO: Edit Form Event Listener for edit form;
 // editForm.addEventListener('submit',async(e) => {
 //   e.preventDefault();
+  
 //   const productName = document.getElementById('product-name').value.trim();
 //   const category = document.getElementById('category').value;
 //   const quantity = document.getElementById('quantity').value;
@@ -207,8 +208,10 @@ async function deleteProduct(id) {
 
   console.log("Deleted");
 }
-async function getEditData(id){
+async function editProduct(id){
   const res = await fetch(`http://localhost:8000/inventory/product/data?id=${id};`);
+  const data = await res.json();
+  console.log(data);
   
 }
 // TODO : Fix Database.
