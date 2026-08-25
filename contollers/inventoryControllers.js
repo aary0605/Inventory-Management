@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {addProduct} = require('../database/products');
+const {addProduct,getById} = require('../database/products');
 const {getAllCategory,filterCategory,priceDESC,priceASC} = require('../database/components');
 const deleteProduct = require('../database/buttons');
 const 
@@ -100,5 +100,18 @@ async function deleteProducts(req,res) {
   }
 
 }
+async function productId(req,res) {
+  try {
+    const id = req.query;
+    const data = await getById(id.id);
+    res.staus(200).json({
+      message:"GOT"
+    });
 
-module.exports = {dataHandling,productsHistory,filterByCategory,filterByPrice,deleteProducts};
+  }
+  catch(err) {
+
+  }
+}
+
+module.exports = {dataHandling,productsHistory,filterByCategory,filterByPrice,deleteProducts,productId};
