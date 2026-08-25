@@ -101,6 +101,11 @@ async function updateLowStock(){
     return data[0]; 
 }
 
+async function getById(id) { 
+  const  query = await pool.query(`
+    select * from products 
+    where id = ${id};`);
+    return query[0];
+}
 
-
-module.exports = {addProduct,getDashboardData,getOrders,updateLowStock};
+module.exports = {addProduct,getDashboardData,getOrders,updateLowStock,getById};
