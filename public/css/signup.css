@@ -1,0 +1,98 @@
+body { 
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+ font-family: "Raleway",sans-serif;
+ 
+}
+/* Best match — soft blue tint */
+body { background-color: #EFF6FF; }
+
+/* Safe, neutral */
+body { background-color: #F0F4F8; }
+
+/* Most polished — subtle gradient */
+body { background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%); min-height: 100vh; }
+
+.container { 
+ 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+form { 
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+  border: none;
+  border-radius: 1.2rem;
+  padding:15px;
+  
+  width: 400px; 
+  border-radius: 10px;
+  box-shadow: 1.5px 1px 1.5px 1.5px rgb(223, 190, 195);
+}
+label{
+  color:black;
+}
+input[type="text"],input[type="email"]
+,input[type="password"] { 
+   
+  width: 90%;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 7px;
+  
+}
+
+button { 
+  width:100%;
+  border-radius:8px;
+  padding:5px;
+}
+
+
+#forget-password { 
+  text-align: right;
+  margin-top: 0px;
+  
+}
+#forget-password a{ 
+  color: rgb(101, 48, 101);
+  text-decoration:none;
+  font-size: 16px;
+  cursor: pointer;
+}
+#forget-password a:hover { 
+  color:rgb(235, 159, 171);
+  text-decoration: rgb(209, 91, 162) underline;
+}
+
+#error-message { 
+  display: flex;
+  justify-content: center;
+  width:30%;
+ 
+  text-align: center;
+  font-size: 1.3rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display:none;
+}
+.error { 
+  color: red;
+}
+.success { 
+  color:green;
+}
+#sign-in-btn { 
+  color:white;
+  background-color:rgb(44, 121, 220);
+  padding:10px;
+  font-family: "Raleway",sans-serif;
+}

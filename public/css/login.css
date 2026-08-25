@@ -1,0 +1,128 @@
+*{
+   font-family: "Raleway",sans-serif;
+}
+body { 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height:100vh;
+  
+  background-color:#eef2f7 ;
+}
+.container { 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
+  min-width: 400px;
+  max-width:900px;
+  min-height:300px;
+  box-shadow: rgba(185, 165, 203, 0.564) 3px 4.5px 4px ;
+  
+}
+/* left side */
+.left {
+  width: 60%;
+  padding: 20px;
+  border-right: 2px solid black;
+  
+}
+form { 
+  display: flex;
+  flex-direction:column;
+  width:100%;
+  gap:10px;
+}
+
+button { 
+  width:100%;
+  border-radius:8px;
+  padding:8px;
+   
+  background-color:#9569bc;
+  color:white;
+}
+button:hover { 
+   background:#b1a9d5;
+}
+input[type="text"]
+,input[type="password"] { 
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  border: 2px solid black;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 14px 14px 14px 45px;
+}
+.left h2 {
+  font-size: 2rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+section { 
+  position: relative;
+}
+section i { 
+  position:absolute;
+    left:16px;
+    top:35%;
+    transform:translateY(-50%);
+    color:#666;
+}
+
+/* right side */
+.right { 
+  width:40%;
+  padding:20px;
+  text-align: center;
+  /* background:linear-gradient(135deg,#4f46e5,#7c3aed) */
+  background: linear-gradient(135deg, #EFF6FF 0%, #e2dff2 100%); 
+}
+.right i { 
+  font-size: 1.5rem;
+}
+
+.right h2 { 
+  font-size: 1.8rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-bottom: 5px;
+}
+.right p { 
+  font-size: 1.1rem;
+  text-align: left;
+  margin-left: 8px auto;
+  margin-top: 2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.success {
+ color:green;
+ font-size: 1.3rem;
+ text-align: center;
+ background-color: #eef2f7;
+ border: 2px solid black;
+ width: 100%;
+ margin:15px auto;
+ padding:10px;
+ max-width: 300px;
+ height: auto;
+}
+.error { 
+  color:red;
+ font-size: 1.3rem;
+ text-align: center;
+ background-color: #eef2f7;
+ border: 2px solid black;
+ width: 100%;
+ margin:15px auto;
+ padding:10px;
+ max-width: 300px;
+ height: auto;
+}
+
