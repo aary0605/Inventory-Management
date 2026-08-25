@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Emilys+Candy&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Pompiere&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/login.css">
+  <title>Sign up</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="left">
+      <h2>User Login</h2>
+
+      <div class="error-message">
+        <p id="message"></p>
+      </div>
+
+      <form>
+        <section>
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="username" placeholder="username">
+        </section>
+        <section>
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" placeholder="password" maxlength="10" minlength="4">
+        </section>
+        <button id="login-btn">Login</button>
+      </form>
+    </div>
+    <div class="right">
+      <i class="fa-solid fa-lock"></i>
+      <h2>Welcome back</h2>
+      <p>Sign in to continue accessing to your dashboard.</p>
+    </div>
+  </div>
+</body>
+<script>
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
+  const loginBtn = document.getElementById('login-btn');
+  const message = document.getElementById('message');
+
+  loginBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const response = await fetch('/login', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 'Username': username.value, "Password": password.value })
+    })
+    const data = await response.json();
+    console.log(data)
+    if (data.success) {
+      message.textContent = data.message;
+      message.classList.add('success');
+      setTimeout(() => {
+        message.textContent = "";
+        message.classList.remove('success')
+        window.location.href = data.redirect;
+      }, 3000);
+    }
+    else {
+      data.error.forEach(error => {
+        message.textContent = error;
+        message.classList.remove('success');
+        message.classList.add('error');
+        setTimeout(() => {
+          message.textContent = "";
+          message.classList.remove('error')
+        }, 3000);
+      });
+    }
+  })
+</script>
+
+</html>

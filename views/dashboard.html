@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/b97c950d86.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/dash.css">
+  <title>Dashboard</title>
+  <style>
+    td {
+      text-transform: capitalize;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- sidebar  -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-icon">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+          <path
+            d="M32 206.1L32 544C32 561.7 46.3 576 64 576C81.7 576 96 561.7 96 544L96 304C96 286.3 110.3 272 128 272L512 272C529.7 272 544 286.3 544 304L544 544C544 561.7 558.3 576 576 576C593.7 576 608 561.7 608 544L608 206.1C608 178.6 590.4 154.1 564.2 145.4L335.2 69.1C325.3 65.8 314.7 65.8 304.8 69.1L75.8 145.4C49.6 154.1 32 178.6 32 206.1zM496 320L144 320L144 384L496 384L496 320zM144 480L496 480L496 416L144 416L144 480zM496 512L144 512L144 576L496 576L496 512z" />
+        </svg>
+      </div>
+      <span class="brand-name">StockBridge</span>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-label"> Main</p>
+      <a href="./dashboard" active>
+        <i class="fa-solid fa-table-cells-large"></i>
+        <button id="dashboard"> Dashboard</button>
+      </a>
+      <a href="./inventory">
+        <i class="fa-solid fa-box-open"></i>
+        <button id="inventory"> Inventory</button>
+      </a>
+      <a href="./suppliers">
+        <i class="fa-solid fa-truck-field"></i>
+
+        <button id="suppliers">Suppliers</button>
+      </a>
+
+    </nav>
+    <div class="sidebar-user">
+      <div id="user-info">
+        <div id="user-avatar">
+          A
+        </div>
+        <div class="user-info">
+          <p id="username">Admin23</p>
+          <p id="role">Admin</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <main class="main-content">
+
+    <!-- Navbar -->
+    <nav class="navbar bg-white border-bottom px-4 py-3">
+      <h3 class="m-0">Dashboard</h3>
+    </nav>
+
+    <!-- Main Body -->
+    <div class="container-fluid p-4" id="cards">
+
+      <div class="row g-4">
+
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Total Inventory</h5>
+              <h2 id="total-items"></h2>
+              <p class="text-muted">Items currently in stock</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Low Stock</h5>
+              <h2 id="low-stock"></h2>
+              <p class="text-muted">Items below threshold</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Suppliers</h5>
+              <h2 id="supplier-count"></h2>
+              <p class="text-muted">Registered suppliers</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Product Count</h5>
+              <h2 id="product-count"></h2>
+              <p class="text-muted">Products in the inventory</p>
+            </div>
+
+          </div>
+        </div>
+        <!-- Card-5 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Inventory Total Bill</h5>
+              <h2 id="bill-amount"></h2>
+              <p class="text-muted">Bill of Products</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="cards-info">
+
+      <div class="recent-orders">
+        <div id="recent-head">
+          <h4>Recent Order History</h4>
+          <a href="/orders">View All</a>
+        </div>
+        <div class="table">
+          <table id="orders-table">
+            <thead>
+              <th scope="col">Products</th>
+
+              <th scope="col">Category</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Date</th>
+            </thead>
+            <tbody id="orders">
+              <!--  -->
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="low-stock">
+        <div id="stock-count">
+          <h4> Low stock</h4>
+          <p id="low-items"></p>
+        </div>
+        <ul id="list-of-items">
+        </ul>
+
+      </div>
+    </div>
+  </main>
+</body>
+<script src="/js/dashboard.js"></script>
+
+</html>

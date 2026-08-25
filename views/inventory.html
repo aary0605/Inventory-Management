@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/b97c950d86.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+    .toast-container {
+      display: flex;
+      justify-content: center;
+      width: 350px;
+      height: 80px;
+      position: fixed;
+      bottom: 30px;
+      left: 45%;
+      padding: 10px;
+      margin: auto;
+      border-radius: 8px;
+      animation: slideIn 0.3s ease forwards;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .success {
+      color: darkgreen;
+      background-color: lightgreen;
+      border-left: 6px solid #059669;
+    }
+
+    .error {
+      color: red;
+      background-color: lightcoral;
+      border-left: 6px solid rgb(91, 13, 13);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .toast.fade-out {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    td {
+      text-transform: capitalize;
+    }
+  </style>
+  <link rel="stylesheet" href="/css/dash.css">
+  <title>Inventory Page</title>
+</head>
+
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-icon">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+          <path
+            d="M32 206.1L32 544C32 561.7 46.3 576 64 576C81.7 576 96 561.7 96 544L96 304C96 286.3 110.3 272 128 272L512 272C529.7 272 544 286.3 544 304L544 544C544 561.7 558.3 576 576 576C593.7 576 608 561.7 608 544L608 206.1C608 178.6 590.4 154.1 564.2 145.4L335.2 69.1C325.3 65.8 314.7 65.8 304.8 69.1L75.8 145.4C49.6 154.1 32 178.6 32 206.1zM496 320L144 320L144 384L496 384L496 320zM144 480L496 480L496 416L144 416L144 480zM496 512L144 512L144 576L496 576L496 512z" />
+        </svg>
+      </div>
+      <span class="brand-name">StockBridge</span>
+    </div>
+    <nav class="sidebar-nav">
+      <p class="nav-label"> Main</p>
+      <a href="./dashboard" active>
+        <i class="fa-solid fa-table-cells-large"></i>
+        Dashboard
+      </a>
+      <a href="./inventory">
+        <i class="fa-solid fa-box-open"></i>
+        Inventory
+      </a>
+      <a href="./suppliers">
+        <i class="fa-solid fa-truck-field"></i>
+        Suppliers
+      </a>
+
+    </nav>
+    <div class="sidebar-user">
+      <div id="user-info">
+        <div id="user-avatar">
+          A
+        </div>
+        <div class="user-info">
+          <p id="username">Admin23</p>
+          <p id="role">Admin</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <main class="main-content">
+
+    <!-- Navbar -->
+    <nav class="navbar bg-white border-bottom px-4 py-3">
+      <h3 class="m-0">Inventory</h3>
+    </nav>
+    <div class="container">
+      <div class="dropdowns">
+        <select name="category" id="category-dropdowns">
+          <option value="all">All Categories</option>
+
+          <option value="vegetables">Vegetables</option>
+          <option value=" fruits">Fruits</option>
+          <option value="dairy">Dairy</option>
+          <option value="bakery">Bakery</option>
+          <option value="beverages">Beverages</option>
+        </select>
+        <select name="" id="price-dropdowns">
+          <option value="all">Price</option>
+          <option value="high">High to Low</option>
+          <option value="low">Low to High</option>
+        </select>
+      </div>
+      <button id="add-product"> + Add Product</button>
+    </div>
+    <!-- Add Product Form -->
+    <div class="product-form-container" id="product-form">
+      <div class="product-form">
+        <h2>Add New Product</h2>
+        <button id="cancel-btn"> X</button>
+        <form id="form">
+          <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-name" name="product" placeholder="Enter product name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option selected disabled>Select Category</option>
+              <option value=" vegetables">Vegetables</option>
+              <option value=" fruits">Fruits</option>
+              <option value="dairy">Dairy</option>
+              <option value="bakery">Bakery</option>
+              <option value="beverages">Beverages</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" name="qty" id="quantity" placeholder="Enter quantity" required />
+            </div>
+
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" id="price" name="price" placeholder="Enter price" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="supplier">Supplier Name</label>
+            <input type="text" id="supplier" name="supplier" placeholder="Enter supplier name" required />
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="save-btn" id="save">Save Product</button>
+            <!-- <button type="reset" class="cancel-btn">Cancel</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="product-form-container" id="product-form">
+      <div class="product-form">
+        <h2>Edit Product</h2>
+        <button id="cancel-btn"> X</button>
+        <form id="edit-form">
+          <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="eidt-name" name="product" placeholder="Enter product name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="edit-category" name="category">
+              <option selected disabled>Select Category</option>
+              <option value=" vegetables">Vegetables</option>
+              <option value=" fruits">Fruits</option>
+              <option value="dairy">Dairy</option>
+              <option value="bakery">Bakery</option>
+              <option value="beverages">Beverages</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" name="qty" id="edit-quantity" placeholder="Enter quantity" required />
+            </div>
+
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" id="edit-price" name="price" placeholder="Enter price" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="supplier">Supplier Name</label>
+            <input type="text" id="edit-supplier" name="supplier" placeholder="Enter supplier name" required />
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="save-btn" id="edit">Edit Product</button>
+            <!-- <button type="reset" class="cancel-btn">Cancel</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+    <table id="inventory-table">
+      <thead id="inventory-thead">
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>QTY</th>
+        <th>Supplier</th>
+        <th>Supplier-Id</th>
+
+      </thead>
+      <tbody id="products-body">
+        <tr>
+
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr id="count">
+          <td id="get-count">
+            Showing 2 item
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="toast-container">
+      <span id="icon"></span>
+      <p id="toast-message"></p>
+    </div>
+  </main>
+</body>
+<script src="/js/inventory.js"></script>
+
+</html>

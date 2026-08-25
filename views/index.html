@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Emilys+Candy&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Pompiere&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/signup.css">
+  <!-- <link rel="stylesheet" href="../public/css/signup.css"> -->
+  <title>Sign up</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="logo">
+      <figure>
+        <svg width="280" height="90" viewBox="60 50 500 140" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Bridge icon -->
+          <g transform="translate(60, 50)">
+            <rect x="6" y="62" width="88" height="7" rx="3" fill="#1E6FBB" />
+            <rect x="10" y="62" width="9" height="34" rx="2" fill="#1E6FBB" />
+            <rect x="81" y="62" width="9" height="34" rx="2" fill="#1E6FBB" />
+            <line x1="50" y1="20" x2="18" y2="63" stroke="#1E6FBB" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="50" y1="20" x2="32" y2="63" stroke="#1E6FBB" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="50" y1="20" x2="50" y2="63" stroke="#1E6FBB" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="50" y1="20" x2="68" y2="63" stroke="#1E6FBB" stroke-width="2.5" stroke-linecap="round" />
+            <line x1="50" y1="20" x2="82" y2="63" stroke="#1E6FBB" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="50" cy="20" r="5" fill="#1E6FBB" />
+            <rect x="18" y="108" width="10" height="18" rx="2" fill="#5BAEE3" />
+            <rect x="33" y="100" width="10" height="26" rx="2" fill="#3893D6" />
+            <rect x="48" y="93" width="10" height="33" rx="2" fill="#1E6FBB" />
+            <rect x="63" y="104" width="10" height="22" rx="2" fill="#3893D6" />
+            <rect x="78" y="96" width="10" height="30" rx="2" fill="#5BAEE3" />
+            <line x1="10" y1="128" x2="100" y2="128" stroke="#1E6FBB" stroke-width="1.5" stroke-linecap="round"
+              opacity="0.4" />
+          </g>
+
+          <!-- Wordmark -->
+          <text font-family="Inter, sans-serif" font-size="36" font-weight="500" x="190" y="108">
+            <tspan fill="#1E1E2E">Stock</tspan>
+            <tspan fill="#1E6FBB">Bridge</tspan>
+          </text>
+
+          <!-- Tagline -->
+          <text font-family="Inter, sans-serif" font-size="13" fill="#6B7280" letter-spacing="2" x="191"
+            y="134">INVENTORY MANAGEMENT</text>
+
+          <!-- Divider -->
+          <line x1="175" y1="60" x2="175" y2="170" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 3" />
+
+        </svg>
+      </figure>
+    </div>
+    <h2 class="heading"> Sign in to Your Account</h2>
+    <div id="error-message">
+      <p id="message"></p>
+    </div>
+    <form>
+      <section>
+        <label for="email"> Email</label>
+        <input type="email" id="email">
+      </section>
+      <section>
+        <label for="username"> Username</label>
+        <input type="text" name="username" id="username">
+      </section>
+      <section>
+        <label for="password">Password</label>
+        <input type="password" name="pass" id="password">
+        <p id="forget-password"><a href="">Forget Password?</a></p>
+      </section>
+      <button id="sign-in-btn">Sign in</button>
+    </form>
+    <div class=" login-ask">
+      <p>Have an account? <a href="./login"> Click to login</a></p>
+    </div>
+  </div>
+</body>
+<script>
+
+  const name_user = document.getElementById('username');
+  const password = document.getElementById('password');
+  const email = document.getElementById('email');
+  const errorsContainer = document.getElementById('error-message');
+  const displayError = document.getElementById('message');
+  document.getElementById('sign-in-btn')
+    .addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const response = await fetch('/signup', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 'Name': name_user.value, 'Password': password.value, 'Email': email.value })
+      }).then(res => res.json())
+        .then(data => {
+          // if (data.status) {
+          //   window.location.href = data.redirect;
+          // }
+          let errors = data.error;
+
+          console.log(errors)
+          if (errors.length > 0) {
+            errors.forEach(error => {
+              displayError.innerHTML = `${error} \n`;
+            });
+            errorsContainer.classList.add('error');
+            errorsContainer.style.display = "block";
+            setTimeout(() => {
+              errorsContainer.firstChild.textContent = "";
+              errorsContainer.style.display = "none";
+            }, 3000);
+          }
+          else {
+
+            displayError.classList.remove('error');
+            displayError.textContent = "Sign up successfully";
+            errorsContainer.classList.add('success');
+            errorsContainer.style.display = "block";
+            setTimeout(() => {
+              window.location.href = data.redirect;
+            }, 2000)
+          }
+        })
+    });
+</script>
+
+</html>
