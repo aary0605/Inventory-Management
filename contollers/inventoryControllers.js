@@ -105,7 +105,7 @@ async function productId(req,res) {
     const id = req.query;
     const data = await getById(id.id);
     res.staus(200).json({
-      message:"GOT"
+      message:"Got"
     });
 
   }
