@@ -89,17 +89,29 @@ document.getElementById('form').addEventListener('submit', async function (e) {
 
 
 // TODO: Edit Form Event Listener for edit form;
-// editForm.addEventListener('submit',async(e) => {
-//   e.preventDefault();
-  
-//   const productName = document.getElementById('product-name').value.trim();
-//   const category = document.getElementById('category').value;
-//   const quantity = document.getElementById('quantity').value;
-//   const price = document.getElementById('price').value;
-//   const supplier = document.getElementById('supplier').value.trim();
-//   console.log(productName);
-  
-// })
+editForm.addEventListener('submit',async(e) => {
+  e.preventDefault();
+  const productName = document.getElementById('edit-name').value.trim();
+  const category = document.getElementById('edit-category').value;
+  const quantity = document.getElementById('edit-quantity').value;
+  const price = document.getElementById('edit-price').value;
+  const supplierName = document.getElementById('edit-supplier').value.trim();
+
+  const editedData = {
+    product:productName,
+    category:category,
+    qty:quantity,
+    price:price,
+    supplier:supplierName
+  }
+  console.log(editedData);
+  // const productName = document.getElementById('product-name').value.trim();
+  // const category = document.getElementById('category').value;
+  // const quantity = document.getElementById('quantity').value;
+  // const price = document.getElementById('price').value;
+  // const supplier = document.getElementById('supplier').value.trim();
+   
+})
 
 
 // TODO: Event Listener for change in Category Selection
@@ -208,11 +220,26 @@ async function deleteProduct(id) {
 
   console.log("Deleted");
 }
+
+// TODO displays the edit data
 async function editProduct(id){
+  document.querySelector('.edit-form-container').style.display = "block";
   const res = await fetch(`http://localhost:8000/inventory/product/data?id=${id};`);
   const data = await res.json();
-  console.log(data);
   
+  const productName = document.getElementById('edit-name');
+  const category = document.getElementById('edit-category');
+  const quantity = document.getElementById('edit-quantity');
+  const price = document.getElementById('edit-price');
+  const supplierName = document.getElementById('edit-supplier');
+  
+  
+  productName.value = data.Data[0].product;
+  category.value = data.Data[0].category;
+  quantity.value = data.Data[0].qty;
+  price.value = data.Data[0].price;
+  supplierName.value = data.Data[0].supplier;
+
 }
 // TODO : Fix Database.
 // ! Create a edit form.
