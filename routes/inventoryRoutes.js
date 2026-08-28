@@ -1,7 +1,7 @@
 const app = require('express');
 
 const router = app.Router();
-const {dataHandling,productsHistory,filterByCategory,filterByPrice,deleteProducts,productId} = require('../contollers/inventoryControllers')
+const {dataHandling,productsHistory,filterByCategory,filterByPrice,deleteProducts,productId,editProduct} = require('../contollers/inventoryControllers')
 
 // router.patch('/inventory/edit',)
 
@@ -10,7 +10,7 @@ router.get('/inventory/category',filterByCategory);
 router.get('/inventory/price',filterByPrice);
 router.delete('/inventory/delete',deleteProducts);
 router.get('/inventory/product/data',productId)
-
+router.patch('/inventory/edit',editProduct);
 router.post('/inventory/product',dataHandling);
 
 module.exports = router;

@@ -104,7 +104,7 @@ editForm.addEventListener('submit',async(e) => {
     price:price,
     supplier:supplierName
   }
-  console.log(editedData);
+  const res = await fetch('http://localhost:8000/')
   // const productName = document.getElementById('product-name').value.trim();
   // const category = document.getElementById('category').value;
   // const quantity = document.getElementById('quantity').value;
