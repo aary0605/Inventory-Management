@@ -2,7 +2,7 @@ const express = require('express');
 
 const {addProduct,getById} = require('../database/products');
 const {getAllCategory,filterCategory,priceDESC,priceASC} = require('../database/components');
-const deleteProduct = require('../database/buttons');
+const {deleteProduct,editProducts} = require('../database/buttons');
 const 
 dataHandling = async(req,res) => {
   try{
@@ -118,6 +118,7 @@ async function productId(req,res) {
 async function editProduct(req,res) {
   try {
     const data = req.body;
+    editProducts(data);
     
   }
   catch {
