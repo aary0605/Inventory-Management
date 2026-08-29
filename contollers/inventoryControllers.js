@@ -115,4 +115,14 @@ async function productId(req,res) {
   }
 }
 
-module.exports = {dataHandling,productsHistory,filterByCategory,filterByPrice,deleteProducts,productId};
+async function editProduct(req,res) {
+  try {
+    const data = req.body;
+    
+  }
+  catch {
+
+  }
+
+}
+module.exports = {dataHandling,productsHistory,filterByCategory,filterByPrice,deleteProducts,productId,editProduct};
