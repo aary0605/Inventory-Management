@@ -10,39 +10,39 @@ async function editProduct(id) {
 
 
 
-async function setSupplierId(supplier_name) {
-  try {
-    // const res = await pool.query(`
-    //   UPDATE products 
-    //   JOIN supplier on supplier.supplie_name = products.supplier
-    //   SET products.supplier_id = supplier.supplier_id
-    //   WHERE products.supplier = ?;`,[supplier_name]);
-      const res = await pool.query(`
-        select supplier_id 
-        from supplier
-        where supplie_name = ?;`,
-        [supplier_name]
-      );
-      return res[0];
-  }
-  catch(err) { 
-    console.log(err.sqlMessage);
-  }
-}
+// async function setSupplierId(supplier_name) {
+//   try {
+//     // const res = await pool.query(`
+//     //   UPDATE products 
+//     //   JOIN supplier on supplier.supplie_name = products.supplier
+//     //   SET products.supplier_id = supplier.supplier_id
+//     //   WHERE products.supplier = ?;`,[supplier_name]);
+//       const res = await pool.query(`
+//         select supplier_id 
+//         from supplier
+//         where supplie_name = ?;`,
+//         [supplier_name]
+//       );
+//       return res[0];
+//   }
+//   catch(err) { 
+//     console.log(err.sqlMessage);
+//   }
+// }
 
 
 async function addProduct(product,category,price,qty,supplier)
 { 
   try{ 
-    const supplierId = await setSupplierId(supplier);
+    // const supplierId = await setSupplierId(supplier);
     
     if(supplierId.length == 0) {
       throw new Error('Error: Supplier not registered.');
     }
     
     const res = await pool.query(`
-      INSERT INTO products (product,category,price,qty,supplier,created,supplier_id)
-      VALUES(?,?,?,?,?,CURDATE(),?)`,[product,category,price,qty,supplier,supplierId[0].supplier_id]); 
+      INSERT INTO products (product,category,price,qty,supplier,created)
+      VALUES(?,?,?,?,?,CURDATE())`,[product,category,price,qty,supplier]); 
       console.log("Data entered");
     }
     catch(err){
