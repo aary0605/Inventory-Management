@@ -181,7 +181,7 @@ async function getRows(data) {
       <td> ${row.price}</td>
       <td> ${row.qty}</td>
       <td> ${row.supplier}</td>
-      <td> ${row.supplier_id}</td>
+    
       
       <button id="edit" onclick="editProduct(${row.id})"> Edit</button>
       <button id="delete" onclick="deleteProduct(${row.id})">Delete</button>
