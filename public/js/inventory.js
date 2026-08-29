@@ -96,21 +96,22 @@ editForm.addEventListener('submit',async(e) => {
   const quantity = document.getElementById('edit-quantity').value;
   const price = document.getElementById('edit-price').value;
   const supplierName = document.getElementById('edit-supplier').value.trim();
-
+  const productId = document.getElementById('product-id').value;
   const editedData = {
     product:productName,
     category:category,
     qty:quantity,
     price:price,
-    supplier:supplierName
+    supplier:supplierName,
+    id:productId
   }
-  const res = await fetch('http://localhost:8000/')
-  // const productName = document.getElementById('product-name').value.trim();
-  // const category = document.getElementById('category').value;
-  // const quantity = document.getElementById('quantity').value;
-  // const price = document.getElementById('price').value;
-  // const supplier = document.getElementById('supplier').value.trim();
-   
+ 
+  const res = await fetch('http://localhost:8000/inventory/edit',{
+    method:'PATCH',
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(editedData) 
+  })
+  
 })
 
 
@@ -232,6 +233,7 @@ async function editProduct(id){
   const quantity = document.getElementById('edit-quantity');
   const price = document.getElementById('edit-price');
   const supplierName = document.getElementById('edit-supplier');
+  const productId  = document.getElementById('product-id');
   
   
   productName.value = data.Data[0].product;
@@ -239,6 +241,7 @@ async function editProduct(id){
   quantity.value = data.Data[0].qty;
   price.value = data.Data[0].price;
   supplierName.value = data.Data[0].supplier;
+  productId.value = id;
 
 }
 // TODO : Fix Database.
