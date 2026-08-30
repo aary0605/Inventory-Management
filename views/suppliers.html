@@ -45,6 +45,16 @@
       padding: 0;
       margin: 0;
     }
+
+    .edit-form-container {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 50px;
+
+      width: 100%;
+      margin-top: 25px;
+    }
   </style>
   <title>Suppliers</title>
 </head>
@@ -137,6 +147,41 @@
             <button type="submit" class="save-btn" id="save">Save Product</button>
           </div>
         </form>
+      </div>
+      <!-- ! Edit Form -->
+      <div class="edit-form-container" id="edit-form">
+        <div class="product-form">
+          <h2>Edit Product</h2>
+          <button id="cancel-btn-1"> X</button>
+          <form id="edit-Form">
+            <div class="form-group">
+              <label for="supplier-name">Supplier Name</label>
+              <input type="text" id="edit-name" name="supplier" placeholder="Enter supplier name" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="number" name="phone" id="edit-phone" placeholder="Enter Phone" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="number" id="edit-email" name="email" placeholder="Enter Email" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="edit-city" name="city" placeholder="Enter supplier City" required />
+            </div>
+
+            <div class="form-buttons">
+              <button type="submit" class="save-btn" id="edit-button">Edit Supplier</button>
+              <!-- <button type="reset" class="cancel-btn">Cancel</button> -->
+            </div>
+            <input type="hidden" name="" id="supplier-id">
+          </form>
+        </div>
       </div>
 
       <div class="supplier-controls">
