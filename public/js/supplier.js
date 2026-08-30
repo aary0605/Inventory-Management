@@ -84,11 +84,11 @@ async function getOrderHistory() {
 }
 
 async function handleDelete(id) {
-  const res = await fetch(`/supplier/delete?id=${id}`, {
+  const res = await fetch(`http://localhost:8000/supplier/delete?id=${id}`, {
     method: "DELETE"
   });
-
   console.log("Deleted");
+  
 }
 
 async function handleEdit(id){

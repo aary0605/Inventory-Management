@@ -24,5 +24,11 @@ async function addSupplier(...data){
 }
 // addSupplier({id:1004,supplier:"Abc",city:"Ahemdabad",phone:3444,email:"dffe"});
 
+async function deleteSupplier(id) {
+  const res = await pool.query(`
+    delete from supplier
+    where supplier_id = ${id.id};`);
+    console.log(`${id.id} Deleted`);
+}
 
-module.exports = {addSupplier,supplierData};
+module.exports = {addSupplier,supplierData,deleteSupplier};

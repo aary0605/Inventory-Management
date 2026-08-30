@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {addSupplier,supplierData} = require('../database/supplier');
+const {addSupplier,supplierData,deleteSupplier} = require('../database/supplier');
 
   const supplier = async (req, res) => {
   try {
@@ -33,4 +33,16 @@ const supplierHistory = async(req,res) => {
     });
   }
 };
-module.exports = {supplier,supplierHistory};
+
+
+async function editSupplier(req,res) {
+  const body = req.body;
+
+} 
+
+async function supplierDelete(req,res) {
+  const id = req.query; 
+  deleteSupplier(id)
+
+}
+module.exports = {supplier,supplierHistory,editSupplier,supplierDelete};
