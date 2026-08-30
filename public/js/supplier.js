@@ -21,7 +21,7 @@ form.addEventListener('submit',async (e)=> {
   const supplierPhone = document.getElementById('supplier-tel').value;
   const supplierEmail = document.getElementById('supplier-email').value;
   const supplierCity = document.getElementById('supplier-city').value;
-  const supplierId = document.getElementById('supplier-id').value;   
+  
   try {
     const res = await fetch('http://localhost:8000/supplier/add', {
       method: "POST",
@@ -29,7 +29,6 @@ form.addEventListener('submit',async (e)=> {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        id: Number(supplierId),
         supplier: supplierName,
         city: supplierCity,
         phone: supplierPhone,
@@ -46,8 +45,8 @@ form.addEventListener('submit',async (e)=> {
       setTimeout(() => {
         formContainer.style.display = "none";
         form.reset();
+        getOrderHistory()
       }, 3000);
-      getOrderHistory();
 
     } else {
       alert(data.message);
@@ -62,23 +61,38 @@ form.addEventListener('submit',async (e)=> {
 async function getOrderHistory() { 
   const res = await fetch('http://localhost:8000/supplier/history');
   const data = await res.json();
-
   
   const body = document.getElementById('supplier-table');
   for(const row of data) { 
+   
     const tr = document.createElement('tr');
     tr.innerHTML =
     `
     <tr> 
-    <td> ${row.supplier_id} </td>
     <td> ${row.supplie_name} </td>
     <td> ${row.supplier_city} </td>
     <td> ${row.supplier_contact} </td>
     <td> ${row.supplier_email} </td>
-    <td> ${row.total_products} </td>
+    <td> 
+    <button onclick = handleEdit(${row.supplier_id})> Edit </button>
+    <button onclick = handleDelete(${row.supplier_id})>Delete </button> 
+    </td>
+    </tr>
     `
     body.append(tr);
    } 
 }
 
+async function handleDelete(id) {
+  const res = await fetch(`/supplier/delete?id=${id}`, {
+    method: "DELETE"
+  });
 
+  console.log("Deleted");
+}
+
+async function handleEdit(id){
+  document.querySelector('.edit-form-container').style.display = "block";
+  const res = await fetch(`http://localhost:8000/supplier/data/?id=${id};`);
+  const data = await res.json();
+}
