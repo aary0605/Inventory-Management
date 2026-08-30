@@ -31,4 +31,11 @@ async function deleteSupplier(id) {
     console.log(`${id.id} Deleted`);
 }
 
-module.exports = {addSupplier,supplierData,deleteSupplier};
+async function getSupplier(id){ 
+  const data = await pool.query(`
+    select * from supplier 
+    where supplier_id = ${id};`);
+    return data[0];
+
+}
+module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier};

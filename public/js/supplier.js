@@ -8,12 +8,21 @@ const form = document.getElementById('supplier-form');
 
 const saveBtn = document.getElementById('save');
 
+const editForm = document.querySelector('.edit-form-container');
+const editCancel = document.getElementById('cancel-btn-1');
+
 addSupplier.addEventListener('click',(e)=> {
   formContainer.style.display = "block";
 })
 cancelBtn.addEventListener('click',()=> {
   formContainer.style.display = "none";
 })
+
+
+editCancel.addEventListener('click',(e)=> {
+   editForm.style.display = "none";
+});
+
 getOrderHistory();
 form.addEventListener('submit',async (e)=> {
   e.preventDefault();
@@ -93,6 +102,18 @@ async function handleDelete(id) {
 
 async function handleEdit(id){
   document.querySelector('.edit-form-container').style.display = "block";
-  const res = await fetch(`http://localhost:8000/supplier/data/?id=${id};`);
+  const res = await fetch(`http://localhost:8000/supplier/edit/data/?id=${id};`);
   const data = await res.json();
+ 
+
+  const supplierName = document.getElementById('edit-name');
+  const supplierPhone = document.getElementById('edit-phone');
+  const supplierEmail = document.getElementById('edit-email');
+  const supplierCity = document.getElementById('edit-city');
+
+  supplierName.value = data[0].supplie_name;
+  supplierPhone.value = data[0].supplier_contact;
+  supplierEmail.value = data[0].supplier_email;
+  supplierCity.value = data[0].supplier_city;  
+ 
 }
