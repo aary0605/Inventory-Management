@@ -50,4 +50,13 @@ async function saveEdit(data,id) {
     console.log(err);
   }
 }
-module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit};
+
+async function getSearchSupplier(name) {
+  const query = await pool.query(`
+    select * from supplier 
+    where supplie_name = '${name}';`
+  );
+  return query[0];
+}
+
+module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit,getSearchSupplier};
