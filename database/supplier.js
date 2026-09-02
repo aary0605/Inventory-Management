@@ -38,4 +38,16 @@ async function getSupplier(id){
     return data[0];
 
 }
-module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier};
+async function saveEdit(data,id) {
+  try {
+
+    const query = await pool.query(`
+      update supplier 
+      set supplie_name = '${data.name}',supplier_contact = ${data.phone},supplier_email = '${data.email}',supplier_city = '${data.city}'
+      where supplier_id = ${id.id};`);      
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit};
