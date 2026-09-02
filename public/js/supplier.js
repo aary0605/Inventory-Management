@@ -67,6 +67,34 @@ form.addEventListener('submit',async (e)=> {
     alert("Something went wrong.");
   }
 })
+
+editForm.addEventListener('submit',async(e) => {
+  e.preventDefault();
+  const supplierName = document.getElementById('edit-name');
+  const supplierPhone = document.getElementById('edit-phone');
+  const supplierEmail = document.getElementById('edit-email');
+  const supplierCity = document.getElementById('edit-city');
+  const hiddenId  = document.getElementById('supplier-id').value;
+  console.log(hiddenId);
+  const editedData = {
+    name:supplierName.value,
+    phone:supplierPhone.value,
+    email: supplierEmail.value,
+    city:supplierCity.value
+  };
+  console.log(editedData);
+  const data = await fetch(`http://localhost:8000/supplier/data?id=${hiddenId}`,{
+    method:"PATCH",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(editedData)
+  })
+})
+
+
+
+
+
+
 async function getOrderHistory() { 
   const res = await fetch('http://localhost:8000/supplier/history');
   const data = await res.json();
@@ -110,10 +138,12 @@ async function handleEdit(id){
   const supplierPhone = document.getElementById('edit-phone');
   const supplierEmail = document.getElementById('edit-email');
   const supplierCity = document.getElementById('edit-city');
+  const hiddenId = document.getElementById('supplier-id');
 
   supplierName.value = data[0].supplie_name;
   supplierPhone.value = data[0].supplier_contact;
   supplierEmail.value = data[0].supplier_email;
-  supplierCity.value = data[0].supplier_city;  
+  supplierCity.value = data[0].supplier_city; 
+  hiddenId.value = data[0].supplier_id; 
  
 }
