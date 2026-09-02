@@ -6,8 +6,10 @@ const {supplier,supplierHistory,editSupplier, supplierDelete,fetchSupplier} = re
 
 router.get('/supplier/history', supplierHistory);
 router.delete('/supplier/delete',supplierDelete);
-router.get('/supplier/edit/data',fetchSupplier)
-router.patch('supplier/data',editSupplier);
+router.get('/supplier/edit/data',fetchSupplier);
+
+
+router.patch('/supplier/data',editSupplier);
 
 router.post('/supplier/add',supplier);
 module.exports = router;
