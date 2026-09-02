@@ -186,19 +186,14 @@
 
       <div class="supplier-controls">
 
-        <input type="text" placeholder="Search supplier...">
+        <input type="text" id="search-supplier" placeholder="Search supplier..." onkeydown="handleSearch(event)">
 
-        <select>
-          <option>All Cities</option>
-          <option>Ahmedabad</option>
-          <option>Surat</option>
-          <option>Vadodara</option>
-        </select>
 
-        <select>
-          <option>Sort by Name</option>
-          <option>A-Z</option>
-          <option>Z-A</option>
+
+        <select id="sort">
+          <option selected disabled value="all">Sort by Name</option>
+          <option value="Asc">A-Z</option>
+          <option value="Dsc">Z-A</option>
         </select>
 
       </div>

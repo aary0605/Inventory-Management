@@ -88,11 +88,13 @@ editForm.addEventListener('submit',async(e) => {
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(editedData)
   })
+  const res = await data.json();
+  if(res) {
+    setTimeout(() => {
+      editForm.style.display = "none";
+    },3000);
+  }
 })
-
-
-
-
 
 
 async function getOrderHistory() { 
@@ -100,6 +102,32 @@ async function getOrderHistory() {
   const data = await res.json();
   
   const body = document.getElementById('supplier-table');
+  for(const row of data) { 
+   
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+    `
+    <tr> 
+    <td> ${row.supplie_name} </td>
+    <td> ${row.supplier_city} </td>
+    <td> ${row.supplier_contact} </td>
+    <td> ${row.supplier_email} </td>
+    <td> 
+    <button onclick = handleEdit(${row.supplier_id})> Edit </button>
+    <button onclick = handleDelete(${row.supplier_id})>Delete </button> 
+    </td>
+    </tr>
+    `
+    body.append(tr);
+   } 
+}
+
+
+
+async function displaySearch(data) {
+  const body = document.getElementById('supplier-table');
+  body.innerHTML = '';
+  
   for(const row of data) { 
    
     const tr = document.createElement('tr');
@@ -146,4 +174,15 @@ async function handleEdit(id){
   supplierCity.value = data[0].supplier_city; 
   hiddenId.value = data[0].supplier_id; 
  
+}
+
+
+async function handleSearch(event) {
+  const supplierName = document.getElementById('search-supplier').value;
+  if(event.key == "Enter") {
+    const res = await fetch(`http://localhost:8000/supplier/search?name=${supplierName}`);
+    const data = await res.json();
+    displaySearch(data);
+    
+  }
 }

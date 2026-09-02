@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit} = require('../database/supplier');
+const {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit,getSearchSupplier} = require('../database/supplier');
 
   const supplier = async (req, res) => {
   try {
@@ -49,13 +49,32 @@ async function editSupplier(req,res) {
   const body = req.body;
   const id = req.query;
   await saveEdit(body,id);
+  res.status(200).json({
+    success:true
+  }
+  );
 
 } 
 
 async function supplierDelete(req,res) {
   const id = req.query; 
   await deleteSupplier(id);
-  
-
 }
-module.exports = {supplier,supplierHistory,editSupplier,supplierDelete,fetchSupplier};
+
+async function searchSupplier(req,res) {
+  try {
+    const supplierName = req.query.name;
+    
+    const data = await getSearchSupplier(supplierName);
+    
+    res.status(200).json(data);
+  }
+  catch(err){
+   
+
+  }
+}
+
+
+
+module.exports = {supplier,supplierHistory,editSupplier,supplierDelete,fetchSupplier,searchSupplier};
