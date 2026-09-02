@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {addSupplier,supplierData,deleteSupplier,getSupplier} = require('../database/supplier');
+const {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit} = require('../database/supplier');
 
   const supplier = async (req, res) => {
   try {
@@ -47,6 +47,8 @@ async function fetchSupplier(req,res) {
 }
 async function editSupplier(req,res) {
   const body = req.body;
+  const id = req.query;
+  await saveEdit(body,id);
 
 } 
 
