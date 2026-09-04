@@ -36,9 +36,7 @@ async function addProduct(product,category,price,qty,supplier)
   try{ 
     // const supplierId = await setSupplierId(supplier);
     
-    if(supplierId.length == 0) {
-      throw new Error('Error: Supplier not registered.');
-    }
+   
     
     const res = await pool.query(`
       INSERT INTO products (product,category,price,qty,supplier,created)

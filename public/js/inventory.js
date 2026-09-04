@@ -36,7 +36,7 @@ editCancel.addEventListener('click',(e)=> {
 
 
 // TODO Event listener for the submit
-document.getElementById('form').addEventListener('submit', async function (e) {
+form.addEventListener('submit', async function (e) {
   e.preventDefault();
 
   // ✅ Get all input values
@@ -173,21 +173,21 @@ async function getRows(data) {
       const tr = document.createElement('tr');
       tr.setAttribute("id", row.id);
 
-      count.innerHTML = `Showing ${productCount} Items`;
-      tr.innerHTML = `
-      <tr> 
-      <td>${row.product}</td>
-      <td> ${row.category}</td>
-      <td> ${row.price}</td>
-      <td> ${row.qty}</td>
-      <td> ${row.supplier}</td>
+      count.textContent = ` Showing ${productCount} Items`;
     
+      tr.innerHTML = `
+    <tr> 
+      <td>${row.product}</td>
+      <td>${row.category}</td>
+      <td>${row.price}</td>
+      <td>${row.qty}</td>
+      <td>${row.supplier}</td>
       
-      <button id="edit" onclick="editProduct(${row.id})"> Edit</button>
-      <button id="delete" onclick="deleteProduct(${row.id})">Delete</button>
-      
-      </tr>`
-
+      <td class="flex gap-3 p-2">
+       <button id="edit" class="border-2 bg-blue-600 text-white" onclick="editProduct(${row.id})"> Edit</button>
+       <button id="delete" class="border-2  text-black" onclick="deleteProduct(${row.id})"> Delete </button>
+       </td> 
+    </tr>`
       body.append(tr);
     }
   }
