@@ -7,15 +7,24 @@ async function supplierData() {
 }
 
 
+
+async function setSupplierId() {
+   const data = await supplierData(); 
+   
+   const id = data.length + 1 + 1000;
+   return id;
+}
+
+setSupplierId();
 async function addSupplier(...data){ 
   try {
 
     const res = pool.query(`
-      insert into supplier(supplie_name,
+      insert into supplier(supplier_id,supplie_name,
     supplier_city,
     supplier_contact,
     supplier_email) 
-    values(?,?,?,?,?);`,[data[0].supplier,data[0].city,data[0].phone,data[0].email]);
+    values(?,?,?,?,?);`,[await setSupplierId(),data[0].supplier,data[0].city,data[0].phone,data[0].email]);
    console.log("Data Added"); 
   }
   catch(err) {

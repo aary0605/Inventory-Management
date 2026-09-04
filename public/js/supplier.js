@@ -98,10 +98,20 @@ editForm.addEventListener('submit',async(e) => {
 
 
 async function getOrderHistory() { 
+  const body = document.getElementById('supplier-table');
   const res = await fetch('http://localhost:8000/supplier/history');
   const data = await res.json();
+  if (!data || data.length === 0) {
+    body.innerHTML = `
+      <tr>
+        <td colspan="5" class="text-center py-6 text-gray-400 text-lg">
+           No suppliers Found.
+        </td>
+      </tr>
+    `;
+    return;
+  }
   
-  const body = document.getElementById('supplier-table');
   for(const row of data) { 
    
     const tr = document.createElement('tr');
@@ -113,7 +123,7 @@ async function getOrderHistory() {
     <td> ${row.supplier_contact} </td>
     <td> ${row.supplier_email} </td>
     <td> 
-    <button onclick = handleEdit(${row.supplier_id})> Edit </button>
+    <button class=" border-2 text-black" onclick = handleEdit(${row.supplier_id})> Edit </button>
     <button onclick = handleDelete(${row.supplier_id})>Delete </button> 
     </td>
     </tr>
@@ -128,6 +138,15 @@ async function displaySearch(data) {
   const body = document.getElementById('supplier-table');
   body.innerHTML = '';
   
+  if(!data || data.length == 0) {
+    body.innerHTML = `
+    <tr> 
+    <td colSpan="5" class = "bg-gray-400 text-black text-center py-6 text-lg"> No Supplier Available. </td> 
+    </tr>`;
+    return;
+  }
+ 
+  
   for(const row of data) { 
    
     const tr = document.createElement('tr');
@@ -139,7 +158,7 @@ async function displaySearch(data) {
     <td> ${row.supplier_contact} </td>
     <td> ${row.supplier_email} </td>
     <td> 
-    <button onclick = handleEdit(${row.supplier_id})> Edit </button>
+    <button onclick = handleEdit(${row.supplier_id}) class="bg-blue-600 text-black"> Edit </button>
     <button onclick = handleDelete(${row.supplier_id})>Delete </button> 
     </td>
     </tr>
