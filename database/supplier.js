@@ -15,7 +15,7 @@ async function setSupplierId() {
    return id;
 }
 
-setSupplierId();
+
 async function addSupplier(...data){ 
   try {
 
@@ -31,7 +31,7 @@ async function addSupplier(...data){
     console.log(err);
   }
 }
-// addSupplier({id:1004,supplier:"Abc",city:"Ahemdabad",phone:3444,email:"dffe"});
+
 
 async function deleteSupplier(id) {
   const res = await pool.query(`
