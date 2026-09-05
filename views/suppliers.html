@@ -55,6 +55,21 @@
       width: 100%;
       margin-top: 25px;
     }
+
+    #cancel-btn-1 {
+      background-color: rgba(23, 76, 211, 0.905);
+      padding: 8px;
+      border-radius: 0.8rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: white;
+      border: none;
+    }
+
+    #cancel-btn-1:hover {
+      background-color: #0e4287;
+      color: rgb(172, 166, 166);
+    }
   </style>
   <title>Suppliers</title>
 </head>
@@ -152,7 +167,8 @@
       <div class="edit-form-container" id="edit-form">
         <div class="product-form">
           <h2>Edit Product</h2>
-          <button id="cancel-btn-1"> X</button>
+          <button id="cancel-btn-1">
+            X</button>
           <form id="edit-Form">
             <div class="form-group">
               <label for="supplier-name">Supplier Name</label>
@@ -191,7 +207,7 @@
 
 
         <select id="sort">
-          <option selected disabled value="all">Sort by Name</option>
+          <option selected value="all">Sort by Name</option>
           <option value="Asc">A-Z</option>
           <option value="Dsc">Z-A</option>
         </select>

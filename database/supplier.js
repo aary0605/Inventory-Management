@@ -68,4 +68,21 @@ async function getSearchSupplier(name) {
   return query[0];
 }
 
-module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit,getSearchSupplier};
+async function ascHistory() {
+  const data = await pool.query(`
+    select * from supplier 
+    order by supplie_name;`);
+
+  return data[0];
+}
+
+async function descHistory(){
+  const data = await pool.query(`
+    select * from supplier
+    order by supplie_name desc;`);
+    
+  return data[0];
+}
+
+
+module.exports = {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit,getSearchSupplier,ascHistory,descHistory};

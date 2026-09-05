@@ -4,12 +4,16 @@ const cancelBtn = document.getElementById('cancel-btn');
 
 const formContainer= document.querySelector('.form-container');
 
+const body = document.getElementById('supplier-table');
+
 const form = document.getElementById('supplier-form');
 
 const saveBtn = document.getElementById('save');
 
 const editForm = document.querySelector('.edit-form-container');
 const editCancel = document.getElementById('cancel-btn-1');
+
+const sortSelection = document.getElementById('sort');
 
 addSupplier.addEventListener('click',(e)=> {
   formContainer.style.display = "block";
@@ -68,6 +72,9 @@ form.addEventListener('submit',async (e)=> {
   }
 })
 
+
+// * Edit form
+
 editForm.addEventListener('submit',async(e) => {
   e.preventDefault();
   const supplierName = document.getElementById('edit-name');
@@ -75,14 +82,14 @@ editForm.addEventListener('submit',async(e) => {
   const supplierEmail = document.getElementById('edit-email');
   const supplierCity = document.getElementById('edit-city');
   const hiddenId  = document.getElementById('supplier-id').value;
-  console.log(hiddenId);
+  
   const editedData = {
     name:supplierName.value,
     phone:supplierPhone.value,
     email: supplierEmail.value,
     city:supplierCity.value
   };
-  console.log(editedData);
+  
   const data = await fetch(`http://localhost:8000/supplier/data?id=${hiddenId}`,{
     method:"PATCH",
     headers:{"Content-Type":"application/json"},
@@ -96,22 +103,31 @@ editForm.addEventListener('submit',async(e) => {
   }
 })
 
-
-async function getOrderHistory() { 
-  const body = document.getElementById('supplier-table');
-  const res = await fetch('http://localhost:8000/supplier/history');
-  const data = await res.json();
-  if (!data || data.length === 0) {
-    body.innerHTML = `
-      <tr>
-        <td colspan="5" class="text-center py-6 text-gray-400 text-lg">
-           No suppliers Found.
-        </td>
-      </tr>
-    `;
-    return;
+sortSelection.addEventListener('change',async(e) => {
+  const option = sortSelection.value || undefined;
+  if(option == undefined || option == "" || option == "all") {
+    body.innerHTML = "";
+    await getOrderHistory();
   }
-  
+  else if(option == "Asc") {
+   const res = await fetch(`http://localhost:8000/supplier/sort?option=${option}`);
+   const data = await res.json();
+   getRows(data);
+     
+  }
+  else if(option == "Dsc"){ 
+   const res = await fetch(`http://localhost:8000/supplier/sort?option=${option}`);
+   const data = await res.json();
+    getRows(data);
+
+  }
+})
+
+
+
+async function getRows(data) {
+  body.innerHTML = "";
+
   for(const row of data) { 
    
     const tr = document.createElement('tr');
@@ -130,9 +146,26 @@ async function getOrderHistory() {
     `
     body.append(tr);
    } 
+
 }
 
-
+async function getOrderHistory() { 
+ 
+  const res = await fetch('http://localhost:8000/supplier/history');
+  const data = await res.json();
+  if (!data || data.length === 0) {
+    body.innerHTML ="";
+    body.innerHTML = `
+      <tr>
+        <td colspan="5" class="text-center py-6 text-gray-400 text-lg">
+           No suppliers Found.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+  getRows(data)
+}
 
 async function displaySearch(data) {
   const body = document.getElementById('supplier-table');
@@ -171,7 +204,7 @@ async function handleDelete(id) {
   const res = await fetch(`http://localhost:8000/supplier/delete?id=${id}`, {
     method: "DELETE"
   });
-  console.log("Deleted");
+  alert("Supplier Deleted");
   
 }
 

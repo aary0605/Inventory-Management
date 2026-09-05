@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit,getSearchSupplier} = require('../database/supplier');
+const {addSupplier,supplierData,deleteSupplier,getSupplier,saveEdit,getSearchSupplier,ascHistory,descHistory} = require('../database/supplier');
 
   const supplier = async (req, res) => {
   try {
@@ -75,6 +75,23 @@ async function searchSupplier(req,res) {
   }
 }
 
+async function getSort(req,res){
+ 
+  try {
+    const data = req.query.option;
+    if(data == "Asc") {
+      const supplier = await ascHistory();
+      res.status(200).json(supplier);
+    } 
+    else if(data == "Dsc") {
+      const supplier = await descHistory();
+      res.status(200).json(supplier);
+    } 
+  }
+  catch(err) {
+    console.log(err);
+  }
+}
 
 
-module.exports = {supplier,supplierHistory,editSupplier,supplierDelete,fetchSupplier,searchSupplier};
+module.exports = {supplier,supplierHistory,editSupplier,supplierDelete,fetchSupplier,searchSupplier,getSort};
