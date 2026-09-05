@@ -195,3 +195,4 @@ This describe what functions the system performs
 * GitHub
 
 - DB browser for Sqllite
+# Inventory-Management
