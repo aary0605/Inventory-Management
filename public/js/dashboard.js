@@ -7,7 +7,7 @@ const productCount = document.getElementById('product-count');
 const amount = document.getElementById('bill-amount');
 async function inventoryData() { 
    
-   const res = await fetch('http://localhost:8000/api/dashboard');
+   const res = await fetch('/api/dashboard');
    const data = await res.json();
    itemCount.textContent = data.total;
    lowStock.textContent = data.low;
@@ -19,7 +19,7 @@ const tbody = document.getElementById('orders');
 
 async function displayOrders() { 
   
-  const response = await fetch('http://localhost:8000/api/orders');
+  const response = await fetch('/api/orders');
   const data = await response.json();
   console.log(data);
   
@@ -39,7 +39,7 @@ async function displayOrders() {
 const itemsList = document.getElementById('list-of-items');
 
 async function getLowStock() { 
-  const response = await fetch('http://localhost:8000/api/lowStock');
+  const response = await fetch('/api/lowStock');
   const data = await  response.json();
   const lowItems = document.getElementById('low-items');
   lowItems.textContent = `Items:${data.length}`;

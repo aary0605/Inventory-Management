@@ -47,7 +47,7 @@ form.addEventListener('submit', async function (e) {
   const supplier = document.getElementById('supplier').value.trim();
   try {
 
-    const res = await fetch('http://localhost:8000/inventory/product', {
+    const res = await fetch('/inventory/product', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ product: productName, category: category, price: price, qty: quantity, supplier: supplier })
@@ -106,7 +106,7 @@ editForm.addEventListener('submit',async(e) => {
     id:productId
   }
  
-  const res = await fetch('http://localhost:8000/inventory/edit',{
+  const res = await fetch('/inventory/edit',{
     method:'PATCH',
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(editedData) 
@@ -137,7 +137,7 @@ async function filterHistory(category) {
     }
     else {
 
-      const res = await fetch(`http://localhost:8000/inventory/category?category=${encodeURIComponent(category)}`);
+      const res = await fetch(`/inventory/category?category=${encodeURIComponent(category)}`);
       const data = await res.json();
       getRows(data);
     }
@@ -149,7 +149,7 @@ async function filterHistory(category) {
 
 // * Return All products
 async function productsHistory() {
-  const res = await fetch('http://localhost:8000/inventory/history');
+  const res = await fetch('/inventory/history');
   const data = await res.json();
   getRows(data);
 }
@@ -203,7 +203,7 @@ async function filterByPrice(option) {
     productsHistory();
   }
 
-  const res = await fetch(`http://localhost:8000/inventory/price?option=${encodeURIComponent(option)}`);
+  const res = await fetch(`/inventory/price?option=${encodeURIComponent(option)}`);
 
   const data = await res.json();
 
@@ -225,7 +225,7 @@ async function deleteProduct(id) {
 // TODO displays the edit data
 async function editProduct(id){
   document.querySelector('.edit-form-container').style.display = "block";
-  const res = await fetch(`http://localhost:8000/inventory/product/data?id=${id};`);
+  const res = await fetch(`/inventory/product/data?id=${id};`);
   const data = await res.json();
   
   const productName = document.getElementById('edit-name');

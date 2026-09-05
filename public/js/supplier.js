@@ -36,7 +36,7 @@ form.addEventListener('submit',async (e)=> {
   const supplierCity = document.getElementById('supplier-city').value;
   
   try {
-    const res = await fetch('http://localhost:8000/supplier/add', {
+    const res = await fetch('/supplier/add', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -90,7 +90,7 @@ editForm.addEventListener('submit',async(e) => {
     city:supplierCity.value
   };
   
-  const data = await fetch(`http://localhost:8000/supplier/data?id=${hiddenId}`,{
+  const data = await fetch(`/supplier/data?id=${hiddenId}`,{
     method:"PATCH",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(editedData)
@@ -110,13 +110,13 @@ sortSelection.addEventListener('change',async(e) => {
     await getOrderHistory();
   }
   else if(option == "Asc") {
-   const res = await fetch(`http://localhost:8000/supplier/sort?option=${option}`);
+   const res = await fetch(`/supplier/sort?option=${option}`);
    const data = await res.json();
    getRows(data);
      
   }
   else if(option == "Dsc"){ 
-   const res = await fetch(`http://localhost:8000/supplier/sort?option=${option}`);
+   const res = await fetch(`/supplier/sort?option=${option}`);
    const data = await res.json();
     getRows(data);
 
@@ -151,7 +151,7 @@ async function getRows(data) {
 
 async function getOrderHistory() { 
  
-  const res = await fetch('http://localhost:8000/supplier/history');
+  const res = await fetch('/supplier/history');
   const data = await res.json();
   if (!data || data.length === 0) {
     body.innerHTML ="";
@@ -201,7 +201,7 @@ async function displaySearch(data) {
 }
 
 async function handleDelete(id) {
-  const res = await fetch(`http://localhost:8000/supplier/delete?id=${id}`, {
+  const res = await fetch(`/supplier/delete?id=${id}`, {
     method: "DELETE"
   });
   alert("Supplier Deleted");
@@ -210,7 +210,7 @@ async function handleDelete(id) {
 
 async function handleEdit(id){
   document.querySelector('.edit-form-container').style.display = "block";
-  const res = await fetch(`http://localhost:8000/supplier/edit/data/?id=${id};`);
+  const res = await fetch(`/supplier/edit/data/?id=${id};`);
   const data = await res.json();
  
 
@@ -232,7 +232,7 @@ async function handleEdit(id){
 async function handleSearch(event) {
   const supplierName = document.getElementById('search-supplier').value;
   if(event.key == "Enter") {
-    const res = await fetch(`http://localhost:8000/supplier/search?name=${supplierName}`);
+    const res = await fetch(`/supplier/search?name=${supplierName}`);
     const data = await res.json();
     displaySearch(data);
     

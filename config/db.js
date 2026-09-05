@@ -22,4 +22,13 @@ const pool = mysql.createPool({
     port: process.env.DB_PORT
 });
 
+(async () => {
+  try {
+    const [rows] = await pool.query("SELECT DATABASE() AS db");
+    console.log("✅ Connected to database:", rows);
+  } catch (err) {
+    console.error("❌ Database connection failed:", err);
+  }
+})();
+
 module.exports = pool;
