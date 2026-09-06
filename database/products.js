@@ -34,9 +34,6 @@ async function editProduct(id) {
 async function addProduct(product,category,price,qty,supplier)
 { 
   try{ 
-    // const supplierId = await setSupplierId(supplier);
-    
-   
     
     const res = await pool.query(`
       INSERT INTO products (product,category,price,qty,supplier,created)
@@ -46,14 +43,9 @@ async function addProduct(product,category,price,qty,supplier)
     catch(err){
       console.log("Error:",err.message);
       throw err;
-      
-     
     }
 }
 
-// addProduct("Ice Cream","dairy",400,5,"amul");
-// addProduct("Tomato","Vegetables",150,1,"in","xyz");
-// addProduct("paneer","dairy",100,3,"in","britannia");
 
 
 async function getDashboardData() { 

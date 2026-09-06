@@ -50,7 +50,7 @@ form.addEventListener('submit', async function (e) {
     const res = await fetch('/inventory/product', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ product: productName, category: category, price: price, qty: quantity, supplier: supplier })
+      body: JSON.stringify({ product: productName, category:category, price: price, qty: quantity, supplier: supplier })
     });
 
     const data = await res.json();
@@ -118,6 +118,7 @@ editForm.addEventListener('submit',async(e) => {
 // TODO: Event Listener for change in Category Selection
 getCategory.addEventListener('change', async () => {
   const category = filterHistory(getCategory.value);
+  console.log(getCategory.value);
 });
 
 // TODO: Listen For change in Price Selection
