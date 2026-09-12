@@ -69,9 +69,9 @@ Open your browser at `http://localhost:8000`
 
 ## Screenshots
 
-| Dashboard                               | Inventory                               | Add Product                                 |
-| --------------------------------------- | --------------------------------------- | ------------------------------------------- |
-| ![Dashboard](screenshots/dashboard.png) | ![Inventory](screenshots/inventory.png) | ![Add Product](screenshots/add-product.png) |
+| SignUp | Login | Dashboard | Inventory | Add Product | Edit Product | Supplier | Add Supplier| Edit Supplier |
+| | --------------------------------------- | ------------------------------------------- |
+| ![SignUp] (screenshots/signup.png) | ![Login] (screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) | ![Inventory](screenshots/inventory.png) | ![Add Product](screenshots/add-product.png) | ![EditProduct] (screenshots/edit-product.png) | ![Supplier] (screenshots/supplier.png) | ![Add Supplier] (screenshots/add-supplier.png) | ![Edit Supplier] (screenshots/edit-supplier.png)|
 
 > Add screenshots to a `/screenshots` folder in your repo to display them here.
 
