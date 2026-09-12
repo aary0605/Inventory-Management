@@ -46,17 +46,29 @@ async function editProduct(id) {
 //     }
 // }
 
-const addProduct = (product, category, price, qty, supplier, image_url) => {
-  return new Promise((resolve, reject) => {
+   const addProduct = async (product, category, price, qty, supplier, image_url) => {
+  try {
     const query = `INSERT INTO products (product, category, price, qty, supplier, created, image_url) 
                    VALUES (?, ?, ?, ?, ?, NOW(), ?)`;
     
-    db.query(query, [product, category, price, qty, supplier, image_url || null], (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    });
-  });
-};
+    const [result] = await pool.query(query, [product, category, price, qty, supplier, image_url || null]);
+    
+    return result;
+  } 
+  catch (err) {
+    throw err;
+  }
+}
+  // return new Promise((resolve, reject) => {
+  //   const query = `INSERT INTO products (product, category, price, qty, supplier, created, image_url) 
+  //                  VALUES (?, ?, ?, ?, ?, NOW(), ?)`;
+    
+  //   db.query(query, [product, category, price, qty, supplier, image_url || null], (err, result) => {
+  //     if (err) return reject(err);
+  //     resolve(result);
+  //   });
+  // });
+
 
 async function getDashboardData() { 
   const totalItems = await pool.query(`
