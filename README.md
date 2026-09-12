@@ -1,198 +1,127 @@
-# Inventory-Management-System
+# StockBridge — Inventory Management System
 
-## Intoduction
+A web-based inventory management system built for restaurants, cafes, and cloud kitchens to efficiently manage stock, track expiry dates, and monitor suppliers.
 
-The Inventory Management System is widely used system by the Big companies and the commercial Businesses. This system helps the business and the companies to effciently manage the stocks and items. It help them know about the items that they currently have and the items that they would be upstocking. It curbs the manual handling of the inventory.
-
-## What are the benefits that It would Offer?
-
-The Inventory-Management Would Offer many _benefits_ to the businesses.
-
-- It would scrap the manual handling of the items stock.
-
-* Help to access inventory from anywhere
-
-- Reduce the workforce behind noting the stock
-
-* notifies the user which items needs to be restock
-
-- check for the itens near their expiry without going through all the items manually
-
-* Improves accuracy and operarional efficiency
-
-## About the Project
-
-The Inventory Systems can be built for various business, but this project will be mainly focused on the restaurants ,cafes and cloud kitchens.
-
-It would be focused on the raw materials and items related to the food sectors:
-
-- Raw Materials
-
-* Vegetables
-
-- Dairy Products
-
-* Beverages
-
-- Spices
-
-* And other products
-
-## Problems that Food businesses Face:
-
-There are lot's of problems that the food industries are facing, and one of them is managing the inventory. And they needs to constantly monitor the freshness of the Vegetables,Spices,Dairy Products etc.
-
-Without an Efficient Inventory System they would face problems like :
-
-- Expired ingridients going unnoticed
-
-* Ingridients getting expired
-
-- Manual monitoring gets more time and effort consuming
-
-* Out Of Stock Ingridients going unnoticed
-
-- Leads To Food Wastage because of expired products
-
-* Inaccurate Inventory Record by Manual handling
-
-This System provide an easy to manage Stocks, Monitor expiry Dates, alert users for immediate action.
+---
 
 ## Features
 
-The System will have the following features:
+- User authentication (Sign up / Login / Logout)
+- Add, edit, and delete products
+- Product image upload
+- Filter products by category and price
+- Low stock alerts
+- Supplier management
+- Category management
+- Search and filter inventory
+- Expiry date tracking
 
-- Login
+---
 
-* Dashboard
+## Tech Stack
 
-- Inventory Management
+| Layer        | Technology            |
+| ------------ | --------------------- |
+| Frontend     | HTML, CSS, JavaScript |
+| Backend      | Node.js, Express.js   |
+| Database     | MySQL                 |
+| Image Upload | ImgBB API             |
+| Hosting      | Render                |
 
-* Add Item
+---
 
-- Category Management
+## Setup Instructions
 
-* Supplier Management
+### Prerequisites
 
-- Email Notification
+- Node.js (v18+)
+- A free [ImgBB API key](https://api.imgbb.com)
 
-* Stock Tracking
+### 1. Clone the repo and install dependencies
 
-## Functional Requirements
+```bash
+git clone https://github.com/aary0605/Inventory-Management.git
+cd Inventory-Management
+npm install
+```
 
-This describe what functions the system performs
+### 2. Configure environment variables
 
-### User Login
+Create a `.env` file in the root directory:
 
-- User login
+```env
+DB_HOST=your_mysql_host
+DB_USER=your_mysql_user
+DB_PASSWORD=your_mysql_password
+DB_NAME=inventory
+IMGBB_API_KEY=your_imgbb_api_key
+```
 
-* User Log out
+### 3. Run the server
 
-- Change Password
+```bash
+npm start
+```
 
-* Head to Sign up page
+Open your browser at `http://localhost:8000`
 
-- Authentication
+---
 
-### Dashboard
+## Screenshots
 
-- Total items in inventory
+| Dashboard                               | Inventory                               | Add Product                                 |
+| --------------------------------------- | --------------------------------------- | ------------------------------------------- |
+| ![Dashboard](screenshots/dashboard.png) | ![Inventory](screenshots/inventory.png) | ![Add Product](screenshots/add-product.png) |
 
-* Total Categories
+> Add screenshots to a `/screenshots` folder in your repo to display them here.
 
-- View Stock
+---
 
-* Display expired Products
+## API Routes
 
-- Display Near Expiry Products
+### Auth
 
-* Add item/ View Inventory
+| Method | Route          | Description                     |
+| ------ | -------------- | ------------------------------- |
+| POST   | `/auth/signup` | Register a new user             |
+| POST   | `/auth/login`  | Login and redirect to Dashboard |
 
 ### Inventory
 
-- Display Items
-
-* Add Item
-
-- Delete Item
-
-* Search Item
-
-- Upade Quantity
-
-* Delete Quantity
-
-- Filter by Supplier
-
-* Filter By Category
-
-- filter By Expiry Date
-
-### Categories
-
-- Add Category
-
-* View Category
-
-- Delete Category
-
-* Update Category
+| Method | Route                           | Description                 |
+| ------ | ------------------------------- | --------------------------- |
+| GET    | `/inventory/history`            | Get all products            |
+| POST   | `/inventory/product`            | Add a new product           |
+| PATCH  | `/inventory/edit`               | Edit an existing product    |
+| DELETE | `/inventory/delete?id=`         | Delete a product by ID      |
+| GET    | `/inventory/product/data?id=`   | Get a single product by ID  |
+| GET    | `/inventory/category?category=` | Filter products by category |
+| GET    | `/inventory/price?option=`      | Sort products by price      |
 
 ### Suppliers
 
-- Add Supliers
+| Method | Route                  | Description                |
+| ------ | ---------------------- | -------------------------- |
+| GET    | `/supplier/history`    | Get all suppliers          |
+| POST   | `/supplier/add`        | Add a new supplier         |
+| DELETE | `/supplier/delete?id=` | Delete a supplier          |
+| PATCH  | `/supplier/data`       | Edit an existing Supplier  |
+| GET    | `supplier/search?`     | Search Supplier By name    |
+| GET    | `/supplier/sort?`      | Sort Supplier by Alphabets |
 
-* Delete Supliers
+---
 
-- View Suppliers
+## Live Demo
 
-* Update Suppliers Info
+[https://inventory-management-079j.onrender.com](https://inventory-management-079j.onrender.com)
 
-### Stock Management
+> **Demo credentials:**
+> Username: `Admin23`
+> Password: `Admin1234`
 
-- View history
+---
 
-### expiry Management
+## Author
 
-- Show expired items
-
-* near expiry
-
-### Report
-
-- Total Items
-
-* Total Value
-
-- Low Stock
-
-## Technology Used
-
-### FrontEnd
-
-- Html
-- CSS
-- JS
-
-### BackEnd
-
-- Node js
-
-* Express js
-
-### Database
-
-- SQLlite
-
-### modules
-
-- jsonwebtokens(jwt)
-
-### Tools
-
-- VS Code
-
-* GitHub
-
-- DB browser for Sqllite
-# Inventory-Management
+**Patel Aary**
+[GitHub](https://github.com/aary0605)
