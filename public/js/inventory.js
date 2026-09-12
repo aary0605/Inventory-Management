@@ -285,45 +285,11 @@ editCancel.addEventListener('click', (e) => {
 });
 
 
-// Add this inside getRows, where you build tr.innerHTML
-const stockBadge = row.qty <= 5 
-  ? `<span style="
-        background:#ef4444; 
-        color:white; 
-        font-size:10px; 
-        font-weight:bold;
-        padding:2px 7px; 
-        border-radius:999px; 
-        margin-left:6px;
-        vertical-align:middle;
-     ">⚠️ Low Stock</span>` 
-  : '';
 
-tr.innerHTML = `
-  <td>${imageCell}</td>
-  <td>${row.product} ${stockBadge}</td>   
-  <td>${row.category}</td>
-  <td>${row.price}</td>
-  <td>${row.qty}</td>
-  <td>${row.supplier}</td>
-  <td class="flex gap-3 p-2">
-    <button id="edit" class="border-2 bg-blue-600 text-white" onclick="editProduct(${row.id})">Edit</button>
-    <button id="delete" class="border-2 text-black" onclick="deleteProduct(${row.id})">Delete</button>
-  </td>`;
 
 
 // Count low stock items and show alert
-const lowStockCount = data.filter(row => row.qty <= 5).length;
-const alertBanner = document.getElementById('low-stock-banner');
 
-if (alertBanner) {
-  if (lowStockCount > 0) {
-    alertBanner.textContent = `⚠️ ${lowStockCount} item${lowStockCount > 1 ? 's are' : ' is'} low on stock!`;
-    alertBanner.style.display = 'block';
-  } else {
-    alertBanner.style.display = 'none';
-  }
-}  
 
 // ✅ IMAGE UPLOAD HELPER — uploads to ImgBB and returns URL
 async function uploadImageToImgBB(file) {
@@ -540,20 +506,56 @@ async function getRows(data) {
               title="Click to enlarge"
            />`
         : `<span style="color:#bbb; font-size:12px;">—</span>`;
+       
+        const stockBadge = row.qty <= 5 
+          ? `<span style="
+                background:#ef4444; 
+                color:white; 
+                font-size:10px; 
+                font-weight:bold;
+                padding:2px 7px; 
+                border-radius:999px; 
+                margin-left:6px;
+                vertical-align:middle;
+            ">⚠️ Low Stock</span>` 
+          : '';
 
-      tr.innerHTML = `
-        <td>${imageCell}</td>
-        <td>${row.product}</td>
-        <td>${row.category}</td>
-        <td>${row.price}</td>
-        <td>${row.qty}</td>
-        <td>${row.supplier}</td>
-        <td class="flex gap-3 p-2">
-          <button id="edit" class="border-2 bg-blue-600 text-white" onclick="editProduct(${row.id})">Edit</button>
-          <button id="delete" class="border-2 text-black" onclick="deleteProduct(${row.id})">Delete</button>
-        </td>`;
+        tr.innerHTML = `
+          <td>${imageCell}</td>
+          <td>${row.product} ${stockBadge}</td>   
+          <td>${row.category}</td>
+          <td>${row.price}</td>
+          <td>${row.qty}</td>
+          <td>${row.supplier}</td>
+          <td class="flex gap-3 p-2">
+            <button id="edit" class="border-2 bg-blue-600 text-white" onclick="editProduct(${row.id})">Edit</button>
+            <button id="delete" class="border-2 text-black" onclick="deleteProduct(${row.id})">Delete</button>
+          </td>`;
+          
+      // tr.innerHTML = `
+      //   <td>${imageCell}</td>
+      //   <td>${row.product}</td>
+      //   <td>${row.category}</td>
+      //   <td>${row.price}</td>
+      //   <td>${row.qty}</td>
+      //   <td>${row.supplier}</td>
+      //   <td class="flex gap-3 p-2">
+      //     <button id="edit" class="border-2 bg-blue-600 text-white" onclick="editProduct(${row.id})">Edit</button>
+      //     <button id="delete" class="border-2 text-black" onclick="deleteProduct(${row.id})">Delete</button>
+      //   </td>`;
       body.append(tr);
     }
+    const lowStockCount = data.filter(row => row.qty <= 5).length;
+    const alertBanner = document.getElementById('low-stock-banner');
+
+    if (alertBanner) {
+      if (lowStockCount > 0) {
+        alertBanner.textContent = `⚠️ ${lowStockCount} item${lowStockCount > 1 ? 's are' : ' is'} low on stock!`;
+        alertBanner.style.display = 'block';
+      } else {
+        alertBanner.style.display = 'none';
+      }
+    }  
   }
 }
 
