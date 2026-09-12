@@ -65,6 +65,16 @@
       width: 100%;
       margin-top: 25px;
     }
+
+    #cancel-btn-1 {
+      background-color: rgb(16, 53, 173);
+      border-radius: 10px;
+    }
+
+    #cancel-btn-div {
+      display: flex;
+      justify-content: flex-end;
+    }
   </style>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/dash.css">
@@ -199,10 +209,12 @@
     <div class="edit-form-container" id="edit-form">
       <div class="product-form">
         <h2>Edit Product</h2>
-        <button
-          class="bg-blue-600 text-white p-3 border-2 border-none rounded-full w-10 h-10 flex items-center justify-center "
-          id="cancel-btn-1">
-          X</button>
+        <div id="cancel-btn-div">
+          <button
+            class="bg-blue-600 text-white p-3 border-2 border-none rounded-full w-10 h-10 flex items-center justify-center "
+            id="cancel-btn-1">
+            X</button>
+        </div>
         <form id="edit-Form">
           <div class="form-group">
             <label for="product-name">Product Name</label>
