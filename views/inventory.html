@@ -143,6 +143,16 @@
         <h2>Add New Product</h2>
         <button id="cancel-btn">X</button>
         <form id="form">
+          <!-- Product Image Upload -->
+          <div class="form-group">
+            <label for="product-image">Product Image (optional)</label>
+            <input type="file" id="product-image" accept="image/*" oninput="previewImage(event)" class="form-control" />
+            <div id="img-preview-container" style="display:none; margin-top:8px;">
+              <img id="img-preview" src="" alt="Preview"
+                style="width:100px; height:100px; object-fit:cover; border-radius:8px; border:2px solid #ddd;" />
+            </div>
+            <small id="upload-status" style="display:block; margin-top:4px;"></small>
+          </div>
           <div class="form-group">
             <label for="product-name">Product Name</label>
             <input type="text" id="product-name" name="product" placeholder="Enter product name" required />
@@ -184,6 +194,7 @@
         </form>
       </div>
     </div>
+
     <!-- ! Edit Form -->
     <div class="edit-form-container" id="edit-form">
       <div class="product-form">
@@ -263,7 +274,7 @@
       <p id="toast-message"></p>
     </div>
   </main>
-
+  no
 </body>
 <script src="/js/inventory.js"></script>
 

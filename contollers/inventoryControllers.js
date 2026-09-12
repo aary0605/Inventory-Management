@@ -3,29 +3,48 @@ const express = require('express');
 const {addProduct,getById} = require('../database/products');
 const {getAllCategory,filterCategory,priceDESC,priceASC} = require('../database/components');
 const {deleteProduct,editProducts} = require('../database/buttons');
-const 
-dataHandling = async(req,res) => {
-  try{
-   console.log("Req:",req.body)
-    const {product,category,price,qty,supplier} = req.body;
-    // Make db calls 
+// const 
+// dataHandling = async(req,res) => {
+//   try{
+//    console.log("Req:",req.body)
+//     const {product,category,price,qty,supplier} = req.body;
+//     // Make db calls 
    
-     const result = await addProduct(product,category,price,qty,supplier);
-     console.log('Added');
+//      const result = await addProduct(product,category,price,qty,supplier);
+//      console.log('Added');
   
-    res.status(200).json({
-         message:"Data Added Successfully",
-         success:true
-    })
+//     res.status(200).json({
+//          message:"Data Added Successfully",
+//          success:true
+//     })
     
+//   }
+//   catch(err) {
+    
+//      res.status(500).json({
+//       message:`${err}`
+//      })
+//    }
+  
+// }
+const dataHandling = async(req, res) => {
+  try {
+    console.log("Req:", req.body);
+    const { product, category, price, qty, supplier, image_url } = req.body; // 👈 add image_url
+    
+    const result = await addProduct(product, category, price, qty, supplier, image_url); // 👈 pass it
+    console.log('Added');
+
+    res.status(200).json({
+      message: "Data Added Successfully",
+      success: true
+    });
   }
   catch(err) {
-    
-     res.status(500).json({
-      message:`${err}`
-     })
-   }
-  
+    res.status(500).json({
+      message: `${err}`
+    });
+  }
 }
 const productsHistory = async(req,res) => { 
   try {

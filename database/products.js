@@ -31,22 +31,32 @@ async function editProduct(id) {
 // }
 
 
-async function addProduct(product,category,price,qty,supplier)
-{ 
-  try{ 
+// async function addProduct(product,category,price,qty,supplier)
+// { 
+//   try{ 
     
-    const res = await pool.query(`
-      INSERT INTO products (product,category,price,qty,supplier,created)
-      VALUES(?,?,?,?,?,CURDATE())`,[product,category,price,qty,supplier]); 
-      console.log("Data entered");
-    }
-    catch(err){
-      console.log("Error:",err.message);
-      throw err;
-    }
-}
+//     const res = await pool.query(`
+//       INSERT INTO products (product,category,price,qty,supplier,created)
+//       VALUES(?,?,?,?,?,CURDATE())`,[product,category,price,qty,supplier]); 
+//       console.log("Data entered");
+//     }
+//     catch(err){
+//       console.log("Error:",err.message);
+//       throw err;
+//     }
+// }
 
-
+const addProduct = (product, category, price, qty, supplier, image_url) => {
+  return new Promise((resolve, reject) => {
+    const query = `INSERT INTO products (product, category, price, qty, supplier, created, image_url) 
+                   VALUES (?, ?, ?, ?, ?, NOW(), ?)`;
+    
+    db.query(query, [product, category, price, qty, supplier, image_url || null], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
 
 async function getDashboardData() { 
   const totalItems = await pool.query(`
